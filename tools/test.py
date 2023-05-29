@@ -47,8 +47,8 @@ def parse_args():
     parser.add_argument(
         '--tta', action='store_true', help='Test time augmentation')
     parser.add_argument('--local_rank', type=int, default=0)
-    #args = parser.parse_args()
-    args = parser.parse_args("../work_dirs/segformer_mit-b1_40k_512x512_voc_lidianchi3/segformer_mit-b1_40k_512x512_voc_lidianchi3_ConstantLR.py ../work_dirs/segformer_mit-b1_40k_512x512_voc_lidianchi3/iter_40000.pth --show-dir ../work_dirs/segformer_mit-b1_40k_512x512_voc_lidianchi3/1".split())
+    args = parser.parse_args()
+    #args = parser.parse_args("../work_dirs/segformer_mit-b1_40k_512x512_voc_lidianchi3/segformer_mit-b1_40k_512x512_voc_lidianchi3.py ../work_dirs/segformer_mit-b1_40k_512x512_voc_lidianchi3/iter_40000.pth --show-dir ../work_dirs/segformer_mit-b1_40k_512x512_voc_lidianchi3/1".split())
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)
 
