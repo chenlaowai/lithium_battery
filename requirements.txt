@@ -1,3 +1,4 @@
+# 只作参考，不可install
 mmdeploy==1.0.0
 mmdeploy_runtime_gpu==1.0.0
 mmdet==3.0.0

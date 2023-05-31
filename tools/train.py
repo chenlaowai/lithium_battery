@@ -3,6 +3,9 @@ import argparse
 import logging
 import os
 import os.path as osp
+import torch
+import numpy as np
+import random
 
 from mmengine.config import Config, DictAction
 from mmengine.logging import print_log
@@ -13,6 +16,17 @@ from mmseg.registry import RUNNERS
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import modules
+
+# Fix random seed for reproducibility
+def same_seeds(seed):
+	torch.manual_seed(seed)
+	if torch.cuda.is_available():
+		torch.cuda.manual_seed(seed)
+		torch.cuda.manual_seed_all(seed)
+	np.random.seed(seed)
+	random.seed(seed)
+	torch.backends.cudnn.benchmark = False
+	torch.backends.cudnn.deterministic = True
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a segmentor')
@@ -62,6 +76,8 @@ def parse_args():
 
 def main():
     args = parse_args()
+    # 设置随机种子
+    same_seeds(0)
     # load config
     cfg = Config.fromfile(args.config)
     cfg.launcher = args.launcher
